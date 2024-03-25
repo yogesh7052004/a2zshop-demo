@@ -1,0 +1,15 @@
+{
+  "name": "a2z-shop",
+  "version": "1.0.0",
+  "description": "eCommerce appilication built with MERN stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Yogesh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.1"
+  }
+}
