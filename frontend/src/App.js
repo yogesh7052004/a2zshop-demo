@@ -1,4 +1,6 @@
 import { Container } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import React from 'react'
 import Footer from './components/Footer';
@@ -15,6 +17,7 @@ const App = () => {
       </Container>
     </main>
     <Footer />
+    <ToastContainer />
     </>
   )
 }

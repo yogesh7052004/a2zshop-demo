@@ -1,11 +1,11 @@
-import {useEffect,useState} from 'react'
+
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product'; 
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import {useGetProductsQuery} from '../slices/productsApiSlice'
 import React from 'react'
-import axios from 'axios'
+
 
 const HomeScreen = () => {
     const {data:products, isLoading,error} = useGetProductsQuery();
