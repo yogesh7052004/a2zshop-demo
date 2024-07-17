@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
@@ -97,8 +98,13 @@ const OrderScreen = () => {
   }
 
   const deliverHandler = async () => {
-    await deliverOrder(orderId);
-    refetch();
+    try {
+      await deliverOrder(orderId).unwrap();
+      refetch();
+      toast.success('Order delivered');
+    } catch (err) {
+      toast.error(err?.data.message || err.message);
+    }
   };
 
   return isLoading ? (

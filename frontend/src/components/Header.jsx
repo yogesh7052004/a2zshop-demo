@@ -2,10 +2,11 @@ import { Badge, Navbar, Nav, Container } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useSelector,useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/userApiSlice';
 import { logout } from '../slices/authSlice';
+
 // import logo from '../assets/logo.png';
 import React from 'react'
 
@@ -19,16 +20,16 @@ const Header = () => {
 
    const logoutHandler = async () => {
       try {
-        await logoutApiCall().unwrap();
-        dispatch(logout());
-        // NOTE: here we need to reset cart state for when a user logs out so the next
-        // user doesn't inherit the previous users cart and shipping
-        //dispatch(resetCart())
-        navigate('/login');
+         await logoutApiCall().unwrap();
+         dispatch(logout());
+         // NOTE: here we need to reset cart state for when a user logs out so the next
+         // user doesn't inherit the previous users cart and shipping
+         //dispatch(resetCart())
+         navigate('/login');
       } catch (err) {
-        console.error(err);
+         console.error(err);
       }
-    };
+   };
    return (
       <header>
          <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
@@ -72,7 +73,20 @@ const Header = () => {
                            </Nav.Link>
                         </LinkContainer>
                      )}
-
+                     {/* Admin Links */}
+                     {userInfo && userInfo.isAdmin && (
+                        <NavDropdown title='Admin' id='adminmenu'>
+                           <NavDropdown.Item as={Link} to='/admin/productlist'>
+                              Products
+                           </NavDropdown.Item>
+                           <NavDropdown.Item as={Link} to='/admin/orderlist'>
+                              Orders
+                           </NavDropdown.Item>
+                           <NavDropdown.Item as={Link} to='/admin/userlist'>
+                              Users
+                           </NavDropdown.Item>
+                        </NavDropdown>
+                     )}
                   </Nav>
                </Navbar.Collapse>
             </Container>
